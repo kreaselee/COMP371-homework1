@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Homework 1</string>
+    <string name="second_activity">Second Activity</string>
+    <string name="third_activity">Third Activity</string>
+
+    <string name="textView_home">Mad Libs</string>
+    <string name="button_start">Get started</string>
+
 </resources>
