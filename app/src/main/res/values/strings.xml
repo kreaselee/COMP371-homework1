@@ -6,6 +6,8 @@
     <string name="textView_home">Mad Libs</string>
     <string name="button_start">Get started</string>
     <string name="button_generate">Generate</string>
+    <string name="button_goHome">Go home</string>
+
 
     <string name="toast_missing">Missing fields</string>
 
