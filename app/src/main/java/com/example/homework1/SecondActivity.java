@@ -52,6 +52,7 @@ public class SecondActivity extends AppCompatActivity {
             e.printStackTrace();
         }
         valueArray = intent.getStringExtra("value");
+        // System.out.println(valueArray);
 
         button_generate.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -71,8 +72,11 @@ public class SecondActivity extends AppCompatActivity {
                 editTextList.add((EditText) linearLayout_blanks.getChildAt(i));
         }
 
+        ArrayList<String> inputList = new ArrayList<String>();
+
         for (int i = 0; i < editTextList.size(); i++) {
             String input = editTextList.get(i).getText().toString().trim();
+            inputList.add(input);
             if (input.matches("")) {
                 allFieldsComplete = false;
             }
@@ -84,8 +88,10 @@ public class SecondActivity extends AppCompatActivity {
         if (allFieldsComplete) {
             Intent intent = new Intent(SecondActivity.this, ThirdActivity.class);
 
-            intent.putExtra("inputs", editTextList);
+            intent.putExtra("inputs", inputList);
             intent.putExtra("value", valueArray);
+
+            System.out.println(inputList);
 
             startActivity(intent);
         }
