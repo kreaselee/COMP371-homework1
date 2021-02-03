@@ -2,10 +2,12 @@ package com.example.homework1;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,12 +15,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import org.json.JSONArray;
 import org.json.JSONException;
 
+import java.util.ArrayList;
+
 public class SecondActivity extends AppCompatActivity {
 
     private TextView textView_title;
     private LinearLayout linearLayout_blanks;
     private JSONArray blanks;
     private Button button_generate;
+    private Boolean allFieldsComplete = false;
+    private String valueArray;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -31,9 +37,9 @@ public class SecondActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         textView_title.setText(intent.getStringExtra("title"));
-        String jsonArray = intent.getStringExtra("blanks");
+        String blanksArray = intent.getStringExtra("blanks");
         try {
-            blanks = new JSONArray(jsonArray);
+            blanks = new JSONArray(blanksArray);
             for (int i = 0; i < blanks.length(); i++){
                 EditText editText = new EditText(this);
                 linearLayout_blanks.addView(editText);
@@ -45,7 +51,48 @@ public class SecondActivity extends AppCompatActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+        valueArray = intent.getStringExtra("value");
 
+        button_generate.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                // handle what happens after I click
+                launchNextActivity(v);
+            }
+        });
 
+    }
+
+    private void launchNextActivity(View v) {
+        ArrayList<EditText> editTextList = new ArrayList<EditText>();
+
+        for (int i = 0; i < linearLayout_blanks.getChildCount(); i++) {
+            if (linearLayout_blanks.getChildAt(i) instanceof EditText)
+                editTextList.add((EditText) linearLayout_blanks.getChildAt(i));
+        }
+
+        for (int i = 0; i < editTextList.size(); i++) {
+            String input = editTextList.get(i).getText().toString().trim();
+            if (input.matches("")) {
+                allFieldsComplete = false;
+            }
+            else {
+                allFieldsComplete = true;
+            }
+        }
+
+        if (allFieldsComplete) {
+            Intent intent = new Intent(SecondActivity.this, ThirdActivity.class);
+
+            intent.putExtra("inputs", editTextList);
+            intent.putExtra("value", valueArray);
+
+            startActivity(intent);
+        }
+        else {
+            // create a toast with a warning message for missing fields
+            Toast toast = Toast.makeText(this, R.string.toast_missing, Toast.LENGTH_SHORT);
+            toast.show();
+        }
     }
 }

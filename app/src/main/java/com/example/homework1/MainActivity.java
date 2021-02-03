@@ -32,8 +32,13 @@ public class MainActivity extends AppCompatActivity {
         button_start = findViewById(R.id.button_start);
 
         // add a click listener for our button
-        button_start.setOnClickListener(v -> {
-            launchNextActivity(v);
+        button_start.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                // handle what happens after I click
+
+                launchNextActivity(v);
+            }
         });
     }
 
