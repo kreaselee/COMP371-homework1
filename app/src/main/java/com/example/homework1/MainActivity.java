@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
                 try {
                     JSONObject json = new JSONObject(new String(responseBody));
                     JSONArray blanks = json.getJSONArray("blanks");
-                    JSONArray value = json.getJSONArray("value");
+                    JSONArray values = json.getJSONArray("value");
 
                     Intent intent = new Intent(MainActivity.this, SecondActivity.class);
 
@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
 
                     intent.putExtra("title", json.getString("title"));
                     intent.putExtra("blanks", blanks.toString());
-                    intent.putExtra("value", value.toString());
+                    intent.putExtra("values", values.toString());
 
                     // convert any json data into a string to put into the intent
                     // when you receive the intent in the next activity

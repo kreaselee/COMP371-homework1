@@ -23,8 +23,7 @@ public class SecondActivity extends AppCompatActivity {
     private LinearLayout linearLayout_blanks;
     private JSONArray blanks;
     private Button button_generate;
-    private Boolean allFieldsComplete = false;
-    private String valueArray;
+    private String values;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -51,8 +50,8 @@ public class SecondActivity extends AppCompatActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        valueArray = intent.getStringExtra("value");
-        // System.out.println(valueArray);
+        values = intent.getStringExtra("values");
+
 
         button_generate.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -73,6 +72,7 @@ public class SecondActivity extends AppCompatActivity {
         }
 
         ArrayList<String> inputList = new ArrayList<String>();
+        Boolean allFieldsComplete = true;
 
         for (int i = 0; i < editTextList.size(); i++) {
             String input = editTextList.get(i).getText().toString().trim();
@@ -80,18 +80,16 @@ public class SecondActivity extends AppCompatActivity {
             if (input.matches("")) {
                 allFieldsComplete = false;
             }
-            else {
-                allFieldsComplete = true;
-            }
         }
 
         if (allFieldsComplete) {
             Intent intent = new Intent(SecondActivity.this, ThirdActivity.class);
 
+            intent.putExtra("title", textView_title.getText());
             intent.putExtra("inputs", inputList);
-            intent.putExtra("value", valueArray);
+            intent.putExtra("values", values);
 
-            System.out.println(inputList);
+            // System.out.println(inputList);
 
             startActivity(intent);
         }
