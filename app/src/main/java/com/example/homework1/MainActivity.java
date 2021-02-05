@@ -29,25 +29,20 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // look up the button by its id
         button_start = findViewById(R.id.button_start);
 
-        // add a click listener for our button
+        // add a click listener for the start button
         button_start.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                // handle what happens after I click
-
+                // handle what happens after clicked
                 launchNextActivity(v);
             }
         });
     }
 
     private void launchNextActivity(View v) {
-        // when the button is clicked
-        // I want to send a get request to the API
-        // add the data received from the response to the intent
-        // send it to third activity to be displayed
-
         // set the header because of the api endpoint
         client.addHeader("Accept", "application/json");
         // send a get request to the api url
@@ -65,27 +60,15 @@ public class MainActivity extends AppCompatActivity {
                     Intent intent = new Intent(MainActivity.this, SecondActivity.class);
 
                     // add the fields into the intent
-                    /*
-                    for (int i = 0; i < blanks.length(); i++){
-                        intent.putExtra(blanks.get(i).toString(), blanks.get(i).toString());
-                    }
-
-                     */
-
                     intent.putExtra("title", json.getString("title"));
                     intent.putExtra("blanks", blanks.toString());
                     intent.putExtra("values", values.toString());
 
-                    // convert any json data into a string to put into the intent
-                    // when you receive the intent in the next activity
-                    // convert it back into the json data
                     startActivity(intent);
 
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-
-
             }
 
             @Override
@@ -94,7 +77,5 @@ public class MainActivity extends AppCompatActivity {
                 Log.e("api error", new String(responseBody));
             }
         });
-
-
     }
 }

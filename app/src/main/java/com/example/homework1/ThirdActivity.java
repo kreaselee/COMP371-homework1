@@ -23,24 +23,26 @@ public class ThirdActivity extends AppCompatActivity {
     private TextView textView_storyTitle;
     private TextView textView_story;
     private Button button_goHome;
-    private LinearLayout linearLayout_story;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_third);
 
+        // ook up views by ids
         textView_storyTitle = findViewById(R.id.textView_storyTitle);
         textView_story = findViewById(R.id.textView_story);
         button_goHome = findViewById(R.id.button_goHome);
 
+        // extract intent extras info
         Intent intent = getIntent();
         textView_storyTitle.setText(intent.getStringExtra("title"));
         ArrayList<String> inputList = intent.getStringArrayListExtra("inputs");
 
         String values = intent.getStringExtra("values");
+
+        // add each string inside JSONArray to a list
         ArrayList<String> valuesList = new ArrayList<String>();
-        String story = "";
         try {
             JSONArray valuesArray = new JSONArray(values);
             for (int i = 0; i < valuesArray.length() ; i++){
@@ -50,6 +52,8 @@ public class ThirdActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
+        // construct story by alternating between values and inputs
+        String story = "";
         for (int i = 0; i < valuesList.size()-1; i++) {
             story += valuesList.get(i);
             if (i < inputList.size()) {
@@ -57,13 +61,14 @@ public class ThirdActivity extends AppCompatActivity {
             }
         }
 
-        // System.out.println(story);
+        // set textView to story
         textView_story.setText(story);
 
+        // add a click listener for the home button
         button_goHome.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                // handle what happens after I click
+                // handle what happens after clicked
                 launchNextActivity(v);
             }
         });
@@ -71,6 +76,7 @@ public class ThirdActivity extends AppCompatActivity {
     }
 
     private void launchNextActivity(View v) {
+        // go back to the home page
         Intent intent = new Intent(ThirdActivity.this, MainActivity.class);
         startActivity(intent);
     }
