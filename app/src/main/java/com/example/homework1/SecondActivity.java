@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.res.ResourcesCompat;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -49,7 +50,6 @@ public class SecondActivity extends AppCompatActivity {
                 linearLayout_blanks.addView(editText);
                 TextView textView = new TextView(this);
                 textView.setText(blanks.get(i).toString());
-                // textView.setId
                 linearLayout_blanks.addView(textView);
             }
         } catch (JSONException e) {
