@@ -12,4 +12,14 @@
     <color name="grey_medium">#777777</color>
     <color name="grey_dark">#434343</color>
 
+    <color name="teal_light">#0E8C7E</color>
+    <color name="teal_medium">#0E5F58</color>
+    <color name="teal_dark">#0D2F2F</color>
+
+    <color name="green">#BBBF58</color>
+    <color name="light_yellow">#FBD86A</color>
+    <color name="orange">#C3452A</color>
+
+
+
 </resources>
