@@ -79,6 +79,7 @@ public class SecondActivity extends AppCompatActivity {
 
         // create a list for all inputs converted to a string and trimmed
         ArrayList<String> inputList = new ArrayList<String>();
+
         // to determine if all fields have been filled out
         Boolean allFieldsComplete = true;
 
